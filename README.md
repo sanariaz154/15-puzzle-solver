@@ -4,13 +4,9 @@ The 15-puzzle (also called Gem Puzzle, Game of Fifteen and many others) is a sli
  # Solvabilty of puzzle
   There is a method to check whether any given game state is solvable.
   
-    ( (grid width odd) && (#inversions even) )  ||  ( (grid width even) && ((blank on odd row from bottom) == (#inversions even)) )
-    
-    The formula says
-    
-         1. If the grid width is odd, then the number of inversions in a solvable situation is even.
-         2. If the grid width is even, and the blank is on an even row counting from the bottom (second-last, fourth-last etc), then the   number of inversions in a solvable situation is odd.
-         3. If the grid width is even, and the blank is on an odd row counting from the bottom (last, third-last, fifth-last etc) then the number of inversions in a solvable situation is even.
+       1. If the grid width is odd, then the number of inversions in a solvable situation is even.
+       2. If the grid width is even, and the blank is on an even row counting from the bottom (second-last, fourth-last etc), then the   number of inversions in a solvable situation is odd.
+       3. If the grid width is even, and the blank is on an odd row counting from the bottom (last, third-last, fifth-last etc) then the number of inversions in a solvable situation is even.
 
 While , An inversion is when a tile precedes another tile with a lower number on it. The solution state has zero inversions.
 for more information see https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
@@ -25,11 +21,10 @@ At each iteration of its main loop, A-star needs to determine which of its parti
 
 where n is the last node on the path, g(n) is the cost of the path from the start node to n, and h(n) is a heuristic that estimates the cost of the cheapest path from n to the goal.
 
-   # Hueristic (Linear Conflict)
+   ## Hueristic (Linear Conflict) ##
    The heuristic is problem-specific. For the algorithm to find the actual shortest path, the heuristic function must be admissible, meaning that it never overestimates the actual cost to get to the nearest goal node.
    
-      # Linear Conflict Tiles Definition
-       Two tiles tj and tk are in a linear conflict if tj and tk are in the same line, the goal positions of tj and tk are both in that line, tj is to the right of tk and goal position of tj is to the left of the goal position of tk.
+      **Linear Conflict Tiles Definition**: *Two tiles tj and tk are in a linear conflict if tj and tk are in the same line, the goal positions of tj and tk are both in that line, tj is to the right of tk and goal position of tj is to the left of the goal position of tk.*
 
 The linear conflict adds at least two moves to the Manhattan Distance of the two conflicting tiles, by forcing them to surround one another. Therefore the heuristic function will add a cost of 2 moves for each pair of conflicting tiles.
 
